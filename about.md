@@ -7,6 +7,6 @@ I completed my masters studies in Physics in 2021 from University College London
 
 Before studying at UCL, I completed my undergraduate studies in Mathematics & Physics at Wesleyan University in the United States. 
 
-A copy of my most recent CV can be found [here](CV.pdf) directly.
+A copy of my most recent CV can be found [here](CV.pdf).
 
 Thanks for reading!
