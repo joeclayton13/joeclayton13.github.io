@@ -1,10 +1,8 @@
 ---
 layout: post
 mathjax: true
-title: Moving Average Crossover
+title: Trend Following - Moving Average Crossover
 ---
-
-# Trend Following Strategy: Moving Average
 
 The basic idea is: 
 
