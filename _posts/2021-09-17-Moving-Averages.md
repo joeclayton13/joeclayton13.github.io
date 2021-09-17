@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Moving Averages
+title: Moving Average Crossover
+usemathjax: true
 ---
 
 # Trend Following Strategy: Moving Average
