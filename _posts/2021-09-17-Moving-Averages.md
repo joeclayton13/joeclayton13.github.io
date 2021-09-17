@@ -16,13 +16,14 @@ A problem with the outline above is that single-day stock prices can be noisy. I
 * Long: if the $M$-day moving average crosses above the $N$-day moving average.
 * Short: if the $M$-day moving average crosses below the $N$-day moving average.
 
+I considered 50 and 200 day moving averages. 
 
-For the historical data, I used data of the SPDR S&P 500 Trust ETF (a.k.a. SPY) between Jan 2010 - Sep 2021. This is one of the most popular funds which aims to track the S&P 500 Index.
+For historical data, I used the SPDR S&P 500 Trust ETF (a.k.a. SPY) between Jan 2010 - Sep 2021. This is one of the most popular funds which aims to track the S&P 500 Index.
 
 
 ### Simple Moving Average (SMA)
 
-The most basic moving average is the Simple Moving Average (SMA). The $N$-say SMA of close prices on day $t$ is given by,
+The most basic moving average is the Simple Moving Average (SMA). The $N$-day SMA of close prices on day $t$ is given by,
 
 $$
 SMA_{t, N} = \frac{1}{N} \sum_{i = 0}^{N-1} C_{t-i} 
