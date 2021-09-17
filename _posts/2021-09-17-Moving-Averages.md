@@ -23,9 +23,9 @@ For our historical data, we will consider the SPDR S&P 500 Trust ETF (a.k.a. SPY
 
 The most basic moving average is the Simple Moving Average (SMA). The $N$-say SMA of close prices on day $t$ is given by,
 
-$$
+\[
 SMA_{t, N} = \frac{1}{N} \sum_{i = 0}^{N-1} C_{t-i} 
-$$
+\]
 
 A potential drawback of SMA is that it assigns equal weighting to all of the days. Why should the oldest data and more recent data be treated equally? We might want to assigns less weight as we move further back in time. 
 
