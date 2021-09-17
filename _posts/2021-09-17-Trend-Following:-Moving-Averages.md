@@ -2,6 +2,7 @@
 layout: post
 mathjax: true
 title: Trend Following - Moving Average Crossover
+categories: Trading
 ---
 
 The basic idea is: 
