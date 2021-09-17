@@ -1,5 +1,6 @@
 ---
 layout: post
+mathjax: true
 title: Moving Average Crossover
 ---
 
