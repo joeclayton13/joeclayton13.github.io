@@ -28,7 +28,7 @@ $$
 SMA_{t, N} = \frac{1}{N} \sum_{i = 0}^{N-1} C_{t-i} 
 $$
 
-![here](../Images/SMA.png)
+![](../Images/SMA.png?raw=true)
 
 A potential drawback of SMA is that it assigns equal weighting to all of the days. Why should the oldest data and more recent data be treated equally? We might want to assigns less weight as we move further back in time. 
 
