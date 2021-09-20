@@ -271,3 +271,68 @@ $$
 ### A CPU Implementation ###
 
 In this implementation, we require that we generate the sparse matrix A. We solve the matrix equation using ``spsolve`` in every time iteration to find the next configuration of the plate. 
+
+
+<details>
+    <summary> CPU Code </summary>
+<p>
+
+```python
+def generate_inverse(N): 
+    nelements = 5 * N**2 - 16 * N + 16
+
+    row_ind = np.empty(nelements, dtype=np.float64)
+    col_ind = np.empty(nelements, dtype=np.float64)
+    data = np.empty(nelements, dtype=np.float64)
+
+    f = np.empty(N * N, dtype=np.float64)
+
+    alpha = 1
+    h = 2/(N-1)
+    time_step = (h**2)/(4*alpha)
+    C = time_step/(h**2)
+
+    count = 0
+    for j in range(N):
+    for i in range(N):
+        if i == 0 or i == N - 1 or j == 0 or j == N - 1:
+        row_ind[count] = col_ind[count] = j * N + i
+        data[count] =  1
+        f[j * N + i] = 0
+        count += 1
+                
+        else:
+        row_ind[count : count + 5] = j * N + i
+        col_ind[count] = j * N + i
+        col_ind[count + 1] = j * N + i + 1
+        col_ind[count + 2] = j * N + i - 1
+        col_ind[count + 3] = (j + 1) * N + i
+        col_ind[count + 4] = (j - 1) * N + i
+                                
+        data[count] = 1 + 4*C
+        data[count + 1 : count + 5] = - C
+        f[j * N + i] = 1
+                
+        count += 5
+                                                
+    return coo_matrix((data, (row_ind, col_ind)), shape=(N**2, N**2)).tocsr()
+
+def cpu_backward(backward_plate, N, iterations): 
+    cpu_prev_plate = backward_plate[0, :, :].reshape(N**2)
+    A = generate_inverse(N)
+
+    for k in range(iterations - 1): 
+    sol = spsolve(A, backward_plate[k, :, :].reshape(N*N))
+    backward_plate[k+1, :, :] = sol.reshape((N,N))
+
+    if (backward_plate[k+1, middle, middle] >= 1) and (backward_plate[k, middle, middle] < 1): 
+        print("Iterations: ", k+1)
+        cpu_back_time = k+1
+
+        return backward_plate[k, :, :], cpu_back_time
+```
+</p>
+
+</details>
+
+**Note**: We have set $h = \frac{2}{(N-1)} $ in all of our implementation methods. This is because our plate must have edges which take points $[-1, 1]$. Therefore, our choice of $h$ is to ensure that each side of our plate has length 2. 
