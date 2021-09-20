@@ -76,13 +76,13 @@ First we have a standard CPU computing method for the Euler forward method. We h
 
 
 <details open>
-<summary>CPU Code</summary>
-<!--All you need is a blank line-->
+    <summary>CPU Code</summary>
+    <!--All you need is a blank line-->
 
-    ```python
+    ~~~python
     from __future__ import print_function
     print('Hello world!')
-    ```
+    ~~~
 </details>
 
 
