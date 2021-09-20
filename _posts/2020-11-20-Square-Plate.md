@@ -74,6 +74,24 @@ This method is stable if: \\( \Delta t \leq \frac{h^2}{4} \\).
 
 First we have a standard CPU computing method for the Euler forward method. We have used NUMBA's parallel processing to accelerate the performance. 
 
+<details>
+<summary>I could use some help...</summary>
+<p>
+
+```c#
+public class Order
+{
+    public int OrderId { get; set; }
+    public int CustomerId { get; set; }
+
+    public List<int> Products { get; set; }
+}
+\```
+
+</p>
+</details> 
+
+
 ```python
 def initialize(N, iterations): 
     """
@@ -116,6 +134,9 @@ def forward_step(plate, N, iterations):
       
     return 999
 ```
+
+
+
 
 ### A GPU Implementation ###
 
