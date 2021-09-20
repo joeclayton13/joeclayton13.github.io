@@ -75,9 +75,9 @@ This method is stable if: \\( \Delta t \leq \frac{h^2}{4} \\).
 First we have a standard CPU computing method for the Euler forward method. We have used NUMBA's parallel processing to accelerate the performance. 
 
 
-<details open>
-<summary>Want to ruin the surprise?</summary>
-<br>
+<details>
+<summary>CPU Code</summary>
+
 ```python
 def initialize(N, iterations): 
   """
