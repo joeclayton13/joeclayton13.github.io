@@ -90,3 +90,18 @@ We've seen the generated signals of the moving average methods that have been me
 
 ![](/Images/MovingAverages/Returns.png)
 
+Here's a table of each strategy's total return and their average return per year: 
+
+| Strategy      | Total Return (%)   | Average Yearly Return (%) |
+| --------------| -------------------|---------------------------|
+| SMA           | 47.89              | 4.24                      |
+| WMA           | 41.84              | 3.71                      |
+| EMA           | 55.59              | 4.92                      |
+| DEMA          | -1.82              | -0.16                     |
+
+
+From the data, we can see that although DEMA was the most elaborate, it's the worst strategy by a significant margin. SMA and WMA are both relatively similar, but EMA is definitely the best strategy to employ. 
+
+I didn't factor in transaction costs into my returns calculations but I suspect that if I had, none of these strategies would have been particularly profitable!
+
+Lastly, all of these strategies are really simple. It's probable that using different lengths of moving averages (as opposed to 50 and 200) would yield better results. Also, mixing and matching different moving averages could also be of use. 
