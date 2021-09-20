@@ -110,10 +110,10 @@ def forward_step(plate, N, iterations):
     for k in prange(0, iterations-1): 
       for i in range(1, N-1): 
         for j in range(1,N-1): 
-          if plate[k, middle, middle] >= 1.0: 
-            result_time = k
-            print('CPU Iterations: ', result_time)
-            return result_time
+            if plate[k, middle, middle] >= 1.0: 
+                result_time = k
+                print('CPU Iterations: ', result_time)
+                return result_time
             plate[k+1, i, j] = (1-4*C)*(plate[k, i,j]) + C*(plate[ k, i+1, j] + plate[ k, i-1, j] + plate[ k, i, j+1] + plate[ k, i, j-1])
       
     return 999
@@ -207,9 +207,9 @@ def eval_gpu_forward(gpu_plate, N, iterations):
         gpu_plate[k+1, 1:(N-1), 1:(N-1)] = gpu_result.reshape((N-2), (N-2))
 
         if gpu_plate[k+1, middle, middle] >= 1.0: 
-        gpu_time = k + 1
-        print('GPU Iterations: ', gpu_time)
-        return gpu_plate[k+1, :, :], gpu_time
+            gpu_time = k + 1
+            print('GPU Iterations: ', gpu_time)
+            return gpu_plate[k+1, :, :], gpu_time
     
     print('The center never reached u = 1')
     return gpu_plate[k,:,:], 999999999999
@@ -293,26 +293,26 @@ def generate_inverse(N):
 
     count = 0
     for j in range(N):
-    for i in range(N):
-        if i == 0 or i == N - 1 or j == 0 or j == N - 1:
-        row_ind[count] = col_ind[count] = j * N + i
-        data[count] =  1
-        f[j * N + i] = 0
-        count += 1
-                
-        else:
-        row_ind[count : count + 5] = j * N + i
-        col_ind[count] = j * N + i
-        col_ind[count + 1] = j * N + i + 1
-        col_ind[count + 2] = j * N + i - 1
-        col_ind[count + 3] = (j + 1) * N + i
-        col_ind[count + 4] = (j - 1) * N + i
-                                
-        data[count] = 1 + 4*C
-        data[count + 1 : count + 5] = - C
-        f[j * N + i] = 1
-                
-        count += 5
+        for i in range(N):
+            if i == 0 or i == N - 1 or j == 0 or j == N - 1:
+                row_ind[count] = col_ind[count] = j * N + i
+                data[count] =  1
+                f[j * N + i] = 0
+                count += 1
+                    
+            else:
+                row_ind[count : count + 5] = j * N + i
+                col_ind[count] = j * N + i
+                col_ind[count + 1] = j * N + i + 1
+                col_ind[count + 2] = j * N + i - 1
+                col_ind[count + 3] = (j + 1) * N + i
+                col_ind[count + 4] = (j - 1) * N + i
+                                    
+                data[count] = 1 + 4*C
+                data[count + 1 : count + 5] = - C
+                f[j * N + i] = 1
+                    
+                count += 5
                                                 
     return coo_matrix((data, (row_ind, col_ind)), shape=(N**2, N**2)).tocsr()
 
@@ -321,8 +321,8 @@ def cpu_backward(backward_plate, N, iterations):
     A = generate_inverse(N)
 
     for k in range(iterations - 1): 
-    sol = spsolve(A, backward_plate[k, :, :].reshape(N*N))
-    backward_plate[k+1, :, :] = sol.reshape((N,N))
+        sol = spsolve(A, backward_plate[k, :, :].reshape(N*N))
+        backward_plate[k+1, :, :] = sol.reshape((N,N))
 
     if (backward_plate[k+1, middle, middle] >= 1) and (backward_plate[k, middle, middle] < 1): 
         print("Iterations: ", k+1)
