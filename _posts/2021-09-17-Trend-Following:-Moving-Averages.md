@@ -28,7 +28,7 @@ $$
 SMA_{t, N} = \frac{1}{N} \sum_{i = 0}^{N-1} C_{t-i} 
 $$
 
-![](/Images/SMA.png?raw=true)
+![](/Images/MovingAverages/SMA.png?raw=true)
 
 A potential drawback of SMA is that it assigns equal weighting to all of the days. Why should the oldest data and more recent data be treated equally? We might want to assigns less weight as we move further back in time. 
 
@@ -42,7 +42,7 @@ WMA_{t, N} = \frac{\sum_{i = 0}^{N-1}w_{i} C_{t-i}}{\sum_{i = 0}^{N-1} w_i}
 w_i = N-i
 $$
 
-![](/Images/WMA.png)
+![](/Images/MovingAverages/WMA.png)
 
 ### Exponential Moving Average (EMA)
 The EMA is another way to assign greater weightings to more recent data. It is given by, 
@@ -54,7 +54,7 @@ $$
 where $\alpha$ is some constant decay factor. In this method, the weight of each data point exponentially decreases with each day. 
 
 
-![](/Images/EMA.png)
+![](/Images/MovingAverages/EMA.png)
 
 ### Double Exponential Moving Average (DEMA) 
 
@@ -72,4 +72,9 @@ $$
 \end{align*}
 $$
 
-![](/Images/DEMA.png)
+![](/Images/MovingAverages/DEMA.png)
+
+
+### Returns 
+
+![](/Images/MovingAverages/Returns.png)
