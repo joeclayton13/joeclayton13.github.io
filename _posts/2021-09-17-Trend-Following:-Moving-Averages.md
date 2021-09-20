@@ -28,11 +28,15 @@ $$
 SMA_{t, N} = \frac{1}{N} \sum_{i = 0}^{N-1} C_{t-i} 
 $$
 
+Let's see how a 50 and 200 SMA crossover strategy does. 
+
 ![](/Images/MovingAverages/SMA.png?raw=true)
 
 A potential drawback of SMA is that it assigns equal weighting to all of the days. Why should the oldest data and more recent data be treated equally? We might want to assigns less weight as we move further back in time. 
 
 ### Weighted Moving Average (WMA)
+
+The WMA is an attempt to assign varying weights to data. In this method, the weight of each data point decreases linearly with each day. It is defined, 
 
 $$
 WMA_{t, N} = \frac{\sum_{i = 0}^{N-1}w_{i} C_{t-i}}{\sum_{i = 0}^{N-1} w_i}
@@ -41,6 +45,8 @@ WMA_{t, N} = \frac{\sum_{i = 0}^{N-1}w_{i} C_{t-i}}{\sum_{i = 0}^{N-1} w_i}
 \quad
 w_i = N-i
 $$
+
+Let's see how a 50 and 200 day WMA crossover strategy does. 
 
 ![](/Images/MovingAverages/WMA.png)
 
@@ -53,6 +59,7 @@ $$
 
 where $\alpha$ is some constant decay factor. In this method, the weight of each data point exponentially decreases with each day. 
 
+Let's see how a 50 and 200 day EMA crossover strategy does. 
 
 ![](/Images/MovingAverages/EMA.png)
 
@@ -72,9 +79,14 @@ $$
 \end{align*}
 $$
 
+This is the most elaborate method. Let's see how a 50 and 200 day DEMA crossover strategy does. 
+
 ![](/Images/MovingAverages/DEMA.png)
 
 
 ### Returns 
 
+We've seen the generated signals of the moving average methods that have been mentioned. The best way to compare their performance is by considering their cumulative log and relative returns.
+
 ![](/Images/MovingAverages/Returns.png)
+
