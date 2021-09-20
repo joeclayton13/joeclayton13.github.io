@@ -76,20 +76,15 @@ First we have a standard CPU computing method for the Euler forward method. We h
 
 
 <details open>
-<summary>Write Markdown!</summary>
+<summary>CPU Code</summary>
 <!--All you need is a blank line-->
 
-**Python** *Code*
-```python
-from __future__ import print_function
-print('Hello world!')
-```
+    ```python
+    from __future__ import print_function
+    print('Hello world!')
+    ```
 </details>
 
-```python
-from __future__ import print_function
-print('Hello world!')
-```
 
 ### A GPU Implementation ###
 
