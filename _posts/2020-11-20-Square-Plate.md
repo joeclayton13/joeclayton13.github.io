@@ -122,6 +122,7 @@ def forward_step(plate, N, iterations):
 </p>
 </details> 
 
+Initializing the plate and running ``forward_step`` will let us evaluate this implementation.
 
 ### A GPU Implementation ###
 
@@ -217,6 +218,7 @@ def eval_gpu_forward(gpu_plate, N, iterations):
 </p>
 </details>
 
+Initializing the plate and running ``eval_gpu_forward`` will let us evaluate this implementation.
 
 
 ### Implementation 2: Backward Euler Method
@@ -333,6 +335,8 @@ def cpu_backward(backward_plate, N, iterations):
 </p>
 
 </details>
+
+Initializing the plate and running ``cpu_backward`` will let us evaluate this implementation.
 
 **Note**: We have set $h = \frac{2}{(N-1)} $ in all of our implementation methods. This is because our plate must have edges which take points $[-1, 1]$. Therefore, our choice of $h$ is to ensure that each side of our plate has length 2. 
 
