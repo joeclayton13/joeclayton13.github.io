@@ -324,11 +324,11 @@ def cpu_backward(backward_plate, N, iterations):
         sol = spsolve(A, backward_plate[k, :, :].reshape(N*N))
         backward_plate[k+1, :, :] = sol.reshape((N,N))
 
-    if (backward_plate[k+1, middle, middle] >= 1) and (backward_plate[k, middle, middle] < 1): 
-        print("Iterations: ", k+1)
-        cpu_back_time = k+1
+        if (backward_plate[k+1, middle, middle] >= 1) and (backward_plate[k, middle, middle] < 1): 
+            print("Iterations: ", k+1)
+            cpu_back_time = k+1
 
-        return backward_plate[k, :, :], cpu_back_time
+            return backward_plate[k, :, :], cpu_back_time
 ```
 </p>
 
