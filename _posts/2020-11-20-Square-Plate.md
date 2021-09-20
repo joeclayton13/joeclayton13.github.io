@@ -128,6 +128,97 @@ def forward_step(plate, N, iterations):
 
 We also present a GPU computing method for the Euler forward scheme. In this method, we use a GPU kernel which is very similar to Assignment 3. The CPU controls each time-step iteration, while the GPU performs the computation of the square plate for each time-step. 
 
+<details>
+    <summary> GPU Code </summary>
+<p>
+
+```python
+## Our GPU Kernel ##
+@cuda.jit
+def gpu_forward(N, input_array, C, result_array):
+    ## Shared Memory Arrays ##
+    shared = cuda.shared.array((34, 34), numba.float32)
+
+    ## Positioning - Local ##
+    tx = cuda.threadIdx.x
+    ty = cuda.threadIdx.y
+
+    ## Positioning - Global ##
+    px, py = cuda.grid(2)
+    index = (N-2)*py + px
+
+    if px >= N-2:
+        return
+    if py >= N-2: 
+        return
+
+    ## Loading data into shared memory ##
+    # Middle
+    shared[tx+1, ty+1] = input_array[(N-2)*py + px]
+
+    # Filling in the edges
+    if px == 0: 
+        shared[tx, ty+1] = 0
+    if px == N-3: 
+        shared[tx+2, ty+1] = 0
+    if py == 0: 
+        shared[tx+1, ty] = 0
+    if py == N-3: 
+        shared[tx+1, ty+2] = 5
+
+    if (tx == 0) and (px != 0):
+        shared[tx,ty+1] = input_array[(N-2)*py + px - 1] 
+    if (tx == 31) and (px != N-3):
+        shared[tx+2, ty+1] = input_array[(N-2)*py + px + 1]
+    if (ty == 0) and (py != 0): 
+        shared[tx+1, ty] = input_array[(N-2)*(py-1) + px] 
+    if (ty == 31) and (py != N-3): 
+        shared[tx+1, ty+2] = input_array[(N-2)*(py+1) + px]
+
+    # Sync Threads
+    cuda.syncthreads()
+
+    ## Performing Stencil ##
+    if index < (N-2)**2: 
+        stencil = (1-4*C)*shared[tx+1,ty+1] + C*(shared[tx,ty+1] + shared[tx+2,ty+1] + shared[tx+1,ty] + shared[tx+1,ty+2]) 
+        result_array[index] = stencil
+
+        # Sync Threads
+        cuda.syncthreads()
+
+
+## A function to help evaluate the GPU kernel ##
+def eval_gpu_forward(gpu_plate, N, iterations): 
+    """
+    Create initial array and evaluates GPU Euler forward step
+    """
+    SX = 32
+    SY = 32
+    nblocks = (N + SX - 1) // SX
+    blockspergrid = (nblocks, nblocks)
+    threadsperblock = (SX, SY)
+
+    middle = (N-1)//2
+
+    for k in range(0, iterations-1): 
+        gpu_prev_plate = gpu_plate[k, 1:(N-1), 1:(N-1)].reshape((N-2)**2)
+        gpu_result = np.zeros((N-2)**2, dtype = np.float32)
+
+        gpu_forward[blockspergrid, threadsperblock](N, gpu_prev_plate, C, gpu_result)
+        gpu_plate[k+1, 1:(N-1), 1:(N-1)] = gpu_result.reshape((N-2), (N-2))
+
+        if gpu_plate[k+1, middle, middle] >= 1.0: 
+        gpu_time = k + 1
+        print('GPU Iterations: ', gpu_time)
+        return gpu_plate[k+1, :, :], gpu_time
+    
+    print('The center never reached u = 1')
+    return gpu_plate[k,:,:], 999999999999
+```
+</p>
+</details>
+
+
 
 ### Implementation 2: Backward Euler Method
 
