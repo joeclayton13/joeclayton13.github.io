@@ -74,17 +74,18 @@ This method is stable if: \\( \Delta t \leq \frac{h^2}{4} \\).
 
 First we have a standard CPU computing method for the Euler forward method. We have used NUMBA's parallel processing to accelerate the performance. 
 
-
-<details open>
-    <summary>CPU Code</summary>
-    <!--All you need is a blank line-->
-
-    ~~~python
-    from __future__ import print_function
-    print('Hello world!')
-    ~~~
+{::options parse_block_html="true" /}
+<details>
+    <summary markdown="span">
+        Let's see some code!
+    </summary>
+    ```python
+    print('Hello World!')
+    ```
 </details>
+<br/>
 
+{::options parse_block_html="false" /}
 
 ### A GPU Implementation ###
 
