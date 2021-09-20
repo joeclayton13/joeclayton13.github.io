@@ -86,6 +86,10 @@ print('Hello world!')
 ```
 </details>
 
+```python
+from __future__ import print_function
+print('Hello world!')
+```
 
 ### A GPU Implementation ###
 
