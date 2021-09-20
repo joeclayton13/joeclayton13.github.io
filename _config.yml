@@ -17,7 +17,7 @@ author:
 plugins:
   - jekyll-paginate
 
-markdown: CommonMarkGhPages
+markdown: GFM
 
 # Custom vars
 version:             1.1.0
