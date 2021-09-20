@@ -340,9 +340,11 @@ def cpu_backward(backward_plate, N, iterations):
 
 These are the errors I got for all three implementations: 
 <p align="center">
-Euler Forward (CPU) Error:  7.053204587920749e-05
-Euler Forward (GPU) Error:  7.053204587920749e-05
-Euler Backward (CPU) Error:  0.0004890281047001464
+    Euler Forward (CPU) Error:  7.053204587920749e-05
+    <br />
+    Euler Forward (GPU) Error:  7.053204587920749e-05
+    <br />
+    Euler Backward (CPU) Error:  0.0004890281047001464
 </p>
 
 These errors are pretty negligible. For the forward methods, I got up to $N = 181$, but for the backward method I only managed to get to $N=81$. This is because the backward method is significantly more time-consuming, but answers why the backward method had a much higher error. 
