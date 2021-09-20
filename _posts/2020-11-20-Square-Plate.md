@@ -78,20 +78,6 @@ First we have a standard CPU computing method for the Euler forward method. We h
 <summary>I could use some help...</summary>
 <p>
 
-```c#
-public class Order
-{
-    public int OrderId { get; set; }
-    public int CustomerId { get; set; }
-
-    public List<int> Products { get; set; }
-}
-```
-
-</p>
-</details> 
-
-
 ```python
 def initialize(N, iterations): 
     """
@@ -135,7 +121,8 @@ def forward_step(plate, N, iterations):
     return 999
 ```
 
-
+</p>
+</details> 
 
 
 ### A GPU Implementation ###
@@ -163,8 +150,7 @@ Applying these two relations to the heat equation, we get:
 $$
 \frac{u_{i,j}^{k} - u_{i,j}^{k-1}}{\Delta t} 
 =
-(\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} + u_{i-1,j}^{k}}{h^2}
-+ 
+(\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} + u_{i-1,j}^{k}}{h^2} + 
 \frac{u_{i,j+1}^{k} - 2u_{i,j}^{k} + u_{i,j-1}^{k}}{h^2})
 $$
 
