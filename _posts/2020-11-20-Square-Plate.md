@@ -6,6 +6,7 @@ categories: Physics
 ---
 
 ### Problem Statement ### 
+
 We will consider a square plate with sides \\( \left[ -1,1 \right] \times \left[ -1,1 \right]\\). We have the following initial conditions at time $t=0$: 
 
 *   The temperature of 3 sides is  $u_0=0$.
@@ -19,6 +20,7 @@ To do this, we will implement a finite difference scheme with both forward and b
 
 
 ### Solution ###
+
 First, we note that the temperature of the plate obeys the heat equation: 
 $$
 \frac{\partial u}{\partial t} = \alpha \Delta u
@@ -71,6 +73,54 @@ This method is stable if: \\( \Delta t \leq \frac{h^2}{4} \\).
 ### A CPU Implementation ###
 
 First we have a standard CPU computing method for the Euler forward method. We have used NUMBA's parallel processing to accelerate the performance. 
+
+
+<details open>
+<summary>Want to ruin the surprise?</summary>
+<br>
+```python
+def initialize(N, iterations): 
+  """
+  Creates the initial array for the plate
+  ---
+  N = plate size 
+  iterations: number of time steps
+  """
+  #Initializaing the plate
+  plate = np.zeros((iterations, N, N))
+  plate[ :, N-1, :] = 5
+
+  return plate
+
+@njit
+def forward_step(plate, N, iterations):
+  """
+  Performs forward euler method 
+  ----
+  plate = array representing the temperatures of the plate
+  N = plate dimensions (spatial)
+  iterations = number of time-steps we wish to perform
+  """
+
+  alpha = 1
+  h = 2/(N-1)
+  time_step = (h**2)/(4*alpha)
+  C = time_step/(h**2)
+
+  middle = (N-1)//2
+  result_time = 0
+  for k in prange(0, iterations-1): 
+    for i in range(1, N-1): 
+      for j in range(1,N-1): 
+        if plate[k, middle, middle] >= 1.0: 
+          result_time = k
+          print('CPU Iterations: ', result_time)
+          return result_time
+        plate[k+1, i, j] = (1-4*C)*(plate[k, i,j]) + C*(plate[ k, i+1, j] + plate[ k, i-1, j] + plate[ k, i, j+1] + plate[ k, i, j-1])
+      
+  return 999
+```
+</details>
 
 
 ### A GPU Implementation ###
