@@ -52,8 +52,7 @@ Applying these two relations to the heat equation, we get:
 $$
 \frac{u_{i,j}^{k+1} - u_{i,j}^{k}}{\Delta t} 
 = 
-(\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} - u_{i-1,j}^{k}}{h^2}
-+ 
+(\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} - u_{i-1,j}^{k}}{h^2} + 
 \frac{u_{i,j+1}^{k} - 2u_{i,j}^{k} - u_{i,j-1}^{k}}{h^2})
 $$
 
@@ -75,7 +74,7 @@ This method is stable if: \\( \Delta t \leq \frac{h^2}{4} \\).
 First we have a standard CPU computing method for the Euler forward method. We have used NUMBA's parallel processing to accelerate the performance. 
 
 <details>
-<summary>I could use some help...</summary>
+<summary>CPU Code</summary>
 <p>
 
 ```python
@@ -149,8 +148,7 @@ Applying these two relations to the heat equation, we get:
 
 $$
 \frac{u_{i,j}^{k} - u_{i,j}^{k-1}}{\Delta t} 
-=
-(\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} + u_{i-1,j}^{k}}{h^2} + 
+= (\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} + u_{i-1,j}^{k}}{h^2} + 
 \frac{u_{i,j+1}^{k} - 2u_{i,j}^{k} + u_{i,j-1}^{k}}{h^2})
 $$
 
