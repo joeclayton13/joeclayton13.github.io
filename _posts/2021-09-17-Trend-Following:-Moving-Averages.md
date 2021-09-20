@@ -54,7 +54,7 @@ $$
 where $\alpha$ is some constant decay factor. In this method, the weight of each data point exponentially decreases with each day. 
 
 
-![](../Images/EMA.png)
+![](/Images/EMA.png)
 
 ### Double Exponential Moving Average (DEMA) 
 
@@ -72,4 +72,4 @@ $$
 \end{align*}
 $$
 
-![](../Images/DEMA.png)
+![](/Images/DEMA.png)
