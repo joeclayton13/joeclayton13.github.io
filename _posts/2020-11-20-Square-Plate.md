@@ -50,8 +50,7 @@ $$
 Applying these two relations to the heat equation, we get: 
 
 $$
-\frac{u_{i,j}^{k+1} - u_{i,j}^{k}}{\Delta t} 
-= 
+\frac{u_{i,j}^{k+1} - u_{i,j}^{k}}{\Delta t} = 
 (\frac{u_{i+1,j}^{k} - 2u_{i,j}^{k} - u_{i-1,j}^{k}}{h^2} + 
 \frac{u_{i,j+1}^{k} - 2u_{i,j}^{k} - u_{i,j-1}^{k}}{h^2})
 $$
