@@ -55,7 +55,7 @@ $$
 \frac{u_{i,j+1}^{k} - 2u_{i,j}^{k} - u_{i,j-1}^{k}}{h^2})
 $$
 
-We are able to obtain our final equation:
+where $\Delta t$ is the discretized time step, and $h$ is our discretized spatial step. We are able to obtain our final equation:
 
 $$
 u_{i,j}^{k+1} = (1-4C)u_{i,j}^{k} + C(u_{i+1,j}^{k} + 
@@ -125,7 +125,7 @@ def forward_step(plate, N, iterations):
 
 ### A GPU Implementation ###
 
-We also present a GPU computing method for the Euler forward scheme. In this method, we use a GPU kernel which is very similar to Assignment 3. The CPU controls each time-step iteration, while the GPU performs the computation of the square plate for each time-step. 
+We also present a GPU computing method for the Euler forward scheme. The CPU controls each time-step iteration, while the GPU performs the computation of the square plate for each time-step. 
 
 <details>
     <summary> GPU Code </summary>
@@ -335,3 +335,20 @@ def cpu_backward(backward_plate, N, iterations):
 </details>
 
 **Note**: We have set $h = \frac{2}{(N-1)} $ in all of our implementation methods. This is because our plate must have edges which take points $[-1, 1]$. Therefore, our choice of $h$ is to ensure that each side of our plate has length 2. 
+
+### Validation  
+
+These are the errors I got for all three implementations: 
+<centre>
+Euler Forward (CPU) Error:  7.053204587920749e-05
+Euler Forward (GPU) Error:  7.053204587920749e-05
+Euler Backward (CPU) Error:  0.0004890281047001464
+</centre>
+
+These errors are pretty negligible. For the forward methods, I got up to $N = 181$, but for the backward method I only managed to get to $N=81$. This is because the backward method is significantly more time-consuming, but answers why the backward method had a much higher error. 
+
+### Visualization 
+
+It might be interesting to visualise the heat dynamics of the plate when the center point reaches $u(t') = 1$. All three methods yielded the same image: 
+
+![](/Images/SquarePlate/Visualization.png)
