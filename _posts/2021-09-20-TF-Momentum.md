@@ -2,7 +2,7 @@
 layout: post
 mathjax: true
 title: Trend Following - Momentum
-categories: Momentum
+categories: Trading
 ---
 
 The momentum indicator is defined as the difference between the current price and the price $N$-days ago. 
