@@ -33,6 +33,7 @@ The way this will work is we can evaluate the entire grid for a single diffusion
 
 ```python
 import numpy as np
+
 ### Regular Python Function ###
 
 def diffusion_iteration(un):
