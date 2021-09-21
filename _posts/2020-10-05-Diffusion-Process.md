@@ -32,6 +32,7 @@ The way this will work is we can evaluate the entire grid for a single diffusion
 <p>
 
 ```python
+import numpy as np
 ### Regular Python Function ###
 
 def diffusion_iteration(un):
@@ -76,6 +77,8 @@ We can accelerate our previous function so that it can handle larger values of $
 <p>
 
 ```python
+from numba import njit, prange
+
 ### Serial Numba Implementation ###
     ## The only difference with this function is the addition of @njit decorator
 
