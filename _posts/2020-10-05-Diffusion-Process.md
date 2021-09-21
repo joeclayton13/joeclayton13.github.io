@@ -25,6 +25,8 @@ The following boundary conditions are also applied:
 
 ### CPU Code
 
+The way this will work is we can evaluate the entire grid for a single diffusion step. Then, we can call this function for each iteration we wish to have. Here's the function: 
+
 <details>
     <summary> CPU Code </summary>
 <p>
@@ -60,14 +62,17 @@ def diffusion_iteration(un):
 ```
 
 </p>
-
 </details>
+
+The function is straight forward but obviously it will take a long time if $N$ is big. I think this function's time-complexity is $O (N^2)$, so run time will increase exponentially with $N$. 
 
 
 ### Accelerating with Numba 
 
+We can accelerate our previous function so that it can handle larger values of $N$. This is still a serial programming implementation, but at least it will be faster. We can do this with the ``@njit`` decorator, and the rest of the function will be the same. 
+
 <details>
-    <summary> Numba Serial Programming  </summary>
+    <summary> Numba Serial Programming </summary>
 <p>
 
 ```python
@@ -106,6 +111,8 @@ def diffusion_iteration1(un):
 
 
 ### Parallelise with Numba
+
+The Numba accelerated implementation is better than the regular serial implementation, but we can make it run faster still. We can parallelise the computations using Numba's ``prange`` function in the outermost loop. 
 
 <details>
     <summary> Parallel Numba Programming </summary>
