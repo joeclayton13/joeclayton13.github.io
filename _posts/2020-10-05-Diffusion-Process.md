@@ -17,9 +17,11 @@ $$
 
 The following boundary conditions are also applied:
 
-$$
-u_n(i, 0) = u_0(i, 0) \;\;\;\;\;\; u_n(i, N+1) = u_0(i, N+1) \;\;\;\;\;\; u_n(0, j) = u_0(0, j) \;\;\;\;\;\; u_n(N+1, j) = u_0(N+1, j)
-$$
+* $ u_n(i, 0) = u_0(i, 0) $
+* $ u_n(i, N+1) = u_0(i, N+1) $
+* $ u_n(0, j) = u_0(0, j) $
+* $ u_n(N+1, j) = u_0(N+1, j) $
+
 
 ### CPU Code
 
@@ -141,3 +143,8 @@ def diffusion_iteration2(un):
 ```
 </p>
 </details>
+
+
+### Visualisation 
+
+Here's a visualisation for the diffusion process. I used $N=100$. For my initial distribution $u_{0} (i,j)$, I have points within a central circle with radius $r=25$ to have values 1000 (i.e $u_{0} (i,j)= 1000 $ such that $i, j \in \{ (i,j) | i^2 + j^2 = 625 \}$ )
