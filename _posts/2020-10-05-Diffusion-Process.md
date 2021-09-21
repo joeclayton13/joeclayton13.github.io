@@ -5,14 +5,139 @@ title: A Discrete Diffusion Process
 categories: Physics
 ---
 
-The goal of this post is to simulate a discrete diffusion process. We are given a 2-dimensional grid with points $(i,j)$, such that $i,j\in \{1,\dots, N \}$, and start with an initial distribution $u_0 (i,j)$ of function valus on the grid points. The distribution process follows the following recurrence relation: 
+The goal of this post is to simulate a discrete diffusion process. We're going to do this with a regular CPU serial programming implementation, and then accelerate and parallelise with Numba. 
+
+### Problem Statement 
+
+We are given a 2-dimensional grid with points $(i,j)$, such that $i,j\in \{1,\dots, N \}$, and start with an initial distribution $u_0 (i,j)$ of function valus on the grid points. The distribution process follows the following recurrence relation: 
 
 $$
 u_{n+1}(i,j) = \frac{1}{4}[u_n(i+1, j) + u_n(i-1, j) + u_n(i, j+1) + u_n(i, j-1)]
 $$
 
 The following boundary conditions are also applied:
-    
+
 $$
 u_n(i, 0) = u_0(i, 0) \;\;\;\;\;\; u_n(i, N+1) = u_0(i, N+1) \;\;\;\;\;\; u_n(0, j) = u_0(0, j) \;\;\;\;\;\; u_n(N+1, j) = u_0(N+1, j)
 $$
+
+### CPU Code
+
+<details>
+    <summary> CPU Code </summary>
+<p>
+
+```python
+### Regular Python Function ###
+
+def diffusion_iteration(un):
+    """
+    Perform one diffusion step for all given grid points.
+    
+    Parameters
+    ----------
+    un : numpy.ndarray
+        Numpy array of type `float64` and dimension (N + 2, N + 2) that stores the
+        function values at step n.
+        
+    This function returns a Numpy array of dimension (N + 2, N + 2) of type `float64`
+    that contains the function values after performing one step of the above diffusion
+    iteration.
+    """
+    
+    n = np.shape(un)[0] - 2 # we set n = (N + 2) - 2 = N
+    result = np.copy(un)
+    
+    ## Distribution Process for each cell not on the boundary 
+    for i in range(1,n+1):    # Note: indices range from 1 to n to exclude the boundary cells
+        for j in range(1,n+1): 
+            # Taking the average of the four surrounding grid points
+            result[i,j] = (un[i+1, j] + un[i-1, j] + un[i, j+1] + un[i, j-1])/4
+  
+    return result
+```
+
+</p>
+
+</details>
+
+
+### Accelerating with Numba 
+
+<details>
+    <summary> Numba Serial Programming  </summary>
+<p>
+
+```python
+### Serial Numba Implementation ###
+    ## The only difference with this function is the addition of @njit decorator
+
+@njit
+def diffusion_iteration1(un):
+    """
+    Perform one diffusion step for all given grid points.
+    
+    Parameters
+    ----------
+    un : numpy.ndarray
+        Numpy array of type `float64` and dimension (N + 2, N + 2) that stores the
+        function values at step n.
+        
+    This function returns a Numpy array of dimension (N + 2, N + 2) of type `float64`
+    that contains the function values after performing one step of the above diffusion
+    iteration.
+    """
+
+    n = np.shape(un)[0] - 2 # we set n = (N + 2) - 2 = N
+    result = np.copy(un)
+    
+    ## Distribution Process for each cell not on the boundary 
+    for i in range(1,n+1):    # Note: indices range from 1 to n to exclude the boundary cells
+        for j in range(1,n+1): 
+            result[i,j] = (un[i+1, j] + un[i-1, j] + un[i, j+1] + un[i, j-1])/4
+            # Taking the average of the four surrounding grid points
+    
+    return result
+```
+</p>
+</details>
+
+
+### Parallelise with Numba
+
+<details>
+    <summary> Parallel Numba Programming </summary>
+<p>
+
+```python
+## Parallel Numba Implementation
+
+@njit(['float64[:,:](float64[:,:])'], parallel = True)
+def diffusion_iteration2(un):
+    """
+    Perform one diffusion step for all given grid points.
+    
+    Parameters
+    ----------
+    un : numpy.ndarray
+        Numpy array of type `float64` and dimension (N + 2, N + 2) that stores the
+        function values at step n.
+        
+    This function returns a Numpy array of dimension (N + 2, N + 2) of type `float64`
+    that contains the function values after performing one step of the above diffusion
+    iteration.
+    """
+
+    n = np.shape(un)[0] - 2 # we set n = (N + 2) - 2 = N
+    result = np.copy(un)
+    
+    ## Distribution Process for each cell not on the boundary 
+    for i in prange(1,n+1):    # Note: indices range from 1 to n to exclude the boundary cells
+        for j in range(1,n+1): 
+            result[i,j] = (un[i+1, j] + un[i-1, j] + un[i, j+1] + un[i, j-1])/4
+            # Taking the average of the four surrounding grid points
+  
+    return result
+```
+</p>
+</details>
