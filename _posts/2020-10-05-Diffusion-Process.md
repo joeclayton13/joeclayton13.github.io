@@ -156,4 +156,4 @@ def diffusion_iteration2(un):
 
 Here's a visualisation for the diffusion process. I used $N=100$. For my initial distribution $u_{0} (i,j)$, I have points within a central circle with radius $r=25$ to have values 1000 (i.e $u_{0} (i,j)= 1000 $ if $i, j \in { (i,j) | i^2 + j^2 = 625 }$ )
 
-![](/Images/Diffusion/Diffusion.mov)
+![](/Images/Diffusion/Diffusion.gif)
