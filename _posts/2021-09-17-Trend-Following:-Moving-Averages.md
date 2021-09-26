@@ -3,6 +3,7 @@ layout: post
 mathjax: true
 title: Trend Following - Moving Average Crossover
 categories: Trading
+tags: python
 ---
 
 The basic idea is: 
