@@ -4,6 +4,7 @@ mathjax: true
 title: Visualising the Mandelbrot Set
 categories: Mathematics
 tags: python
+published: false
 ---
 
 
@@ -17,6 +18,7 @@ is bounded as $n \to \infty $, and $ z_0 = 0 $. That is, a point $c$ is in the M
 
 ### Code ###
 
+I started by writing a function that checks if a complex point c = $ \( x, iy \) $
 <details>
 <summary>Mandelbrot Code</summary>
 <p>
@@ -25,7 +27,7 @@ is bounded as $n \to \infty $, and $ z_0 = 0 $. That is, a point $c$ is in the M
 @njit
 def mandelbrot(cx, cy, max_iters): 
     """
-    Checks if a complex number (represented by pixel (x, iy)) is in the mandelbrot set
+    Checks if a complex number c (represented by pixel (x, iy)) is in the mandelbrot set
     calculates zn+1 = zn^2 + c
     cx: Re(c)
     cy: Im(c)
@@ -33,17 +35,20 @@ def mandelbrot(cx, cy, max_iters):
     
     ### Starting at the point (0,0i),
     z = complex(0)
+    zx = 0.0
+    zy = 0.0
+
     c = complex(cx, cy)
     
     for i in range(max_iters): 
         
         # Mandelbrot Condition to break out 
-        if abs(z) > 4: 
+        if x**2 + y**2 > 4: 
             # If not in Mandelbrot, we assign it black colour
             return 0
             
         # Update
-        z = z**2 + c
+        zx, zy = z**2 - y**2 + cx, 2*x*y + cy
 
     # if in Mandelbrot, we give it white colour
     return 255
@@ -66,7 +71,7 @@ def eval_mandelbrot(height, width, x_start, y_start, x_end, y_end, max_iters:int
     y = np.linspace(y_start, y_end, height)
 
     result = np.zeros((width, height))
-    for i, cx in enumerate(x): # Rows
+    for i, cx in enumerate(x): 
         for j, cy in enumerate(y): 
             res = mandelbrot(cx,cy, max_iters)
             result[i,j] = res

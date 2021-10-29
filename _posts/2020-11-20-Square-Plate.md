@@ -117,7 +117,7 @@ def forward_step(plate, N, iterations):
             plate[k+1, i, j] = (1-4*C)*(plate[k, i,j]) + C*(plate[ k, i+1, j] + plate[ k, i-1, j] + plate[ k, i, j+1] + plate[ k, i, j-1])
       
     return 999
-```
+``` 
 
 </p>
 </details> 
