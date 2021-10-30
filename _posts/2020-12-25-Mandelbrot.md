@@ -48,7 +48,7 @@ def mandelbrot(cx, cy, max_iters):
     --------
     cx: float - Re(c)
     cy: float - Im(c)
-    max_iters: int - Max number of iterations to for criterion into the set
+    max_iters: int - Max number of iterations to be in the set
     '''
     
     ### Starting at the point (0,0i),
