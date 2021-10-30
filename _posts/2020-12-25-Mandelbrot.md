@@ -68,6 +68,7 @@ def mandelbrot(cx, cy, max_iters):
 </p>
 </details>
 
+<br/><br/>
 
 
 It's pretty straightforward, we keep evaluating the Mandelbrot condition for each iteration until we get to ```max_iters```. If the condition is broken, then we know that the recursion relation at that point is unbounded, and we return the number of iterations it took for the condition to break. Otherwise, if we go all the way to the end, we return ```max_iters``` and that point is in the Mandelbrot set.
@@ -125,6 +126,8 @@ def colouring(n, max_iters):
 ```
 </p>
 </details>
+
+<br/><br/>
 
 This is also pretty straightforward. I define two axes, iterate over them to check each point, and keep the results in a 3D NumPy results array. The reason why I used a 3D array instead of a 2D array has to do with the colouring of the final image, since we want points with a similar number of iterations to have similar colours. The results array holds the HSV colour scheme of each pixel / point in the picture. Also, I was too lazy to figure out the colouring so I found some a code snippet online and wrapped it in a function which I called ```colouring```. 
 
