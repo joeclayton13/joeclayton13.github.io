@@ -39,7 +39,7 @@ Using these relations, the function looks like this:
 <p>
 
 ```python
-@njit
+@njit(parallel = True)
 def mandelbrot(cx, cy, max_iters): 
     '''
     Checks if a complex number (represented by pixel (x, iy)) is in the mandelbrot set.
@@ -55,7 +55,7 @@ def mandelbrot(cx, cy, max_iters):
     zx = 0.0
     zy = 0.0
     
-    for i in range(max_iters): 
+    for i in prange(max_iters): 
         # Mandelbrot Condition to break out 
         if zx**2 + zy**2 > 4: 
             return i
