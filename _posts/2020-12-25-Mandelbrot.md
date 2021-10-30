@@ -45,7 +45,7 @@ def mandelbrot(cx, cy, max_iters):
     Checks if a complex number (represented by pixel (x, iy)) is in the mandelbrot set.
     Calculates zn+1 = zn^2 + c
     Returns the number of iterations before breaking. If max_iters is returned, c is in the set
-
+    --------
     cx: float - Re(c)
     cy: float - Im(c)
     max_iters: int - Max number of iterations to for criterion into the set
@@ -69,6 +69,7 @@ def mandelbrot(cx, cy, max_iters):
 </details>
 
 
+
 It's pretty straightforward, we keep evaluating the Mandelbrot condition for each iteration until we get to ```max_iters```. If the condition is broken, then we know that the recursion relation at that point is unbounded, and we return the number of iterations it took for the condition to break. Otherwise, if we go all the way to the end, we return ```max_iters``` and that point is in the Mandelbrot set.
 
 Then, we need to use the ```mandelbrot``` function on every point in our complex plane. This is defined in a function called ```eval_mandelbrot``` and looks like this: 
@@ -81,8 +82,9 @@ Then, we need to use the ```mandelbrot``` function on every point in our complex
 def eval_mandelbrot(
     height, width, x_start, y_start, x_end, y_end, max_iters:int): 
     '''
-    Evaluates the mandelbrot function for each point in the complex plane
+    Evaluates mandelbrot function for each point in the complex plane
     Returns a NumPy array with the number of iterations as elements
+    --------
     height: int - height of the array / image
     width: int - width of the array / image
     x_start: float - Start point on the x (real) axis 
