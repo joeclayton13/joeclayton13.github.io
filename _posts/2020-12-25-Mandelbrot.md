@@ -3,7 +3,7 @@ layout: post
 mathjax: true 
 title: Visualising the Mandelbrot Set
 categories: Mathematics
-tags: python
+tags: [python, fractals]
 published: true
 ---
 
