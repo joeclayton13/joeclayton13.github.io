@@ -4,7 +4,7 @@ mathjax: true
 title: Visualising the Mandelbrot Set
 categories: Mathematics
 tags: python
-published: true
+published: false
 ---
 
 
@@ -69,6 +69,8 @@ def mandelbrot(cx, cy, max_iters):
 </details>
 
 It's pretty straightforward, we keep evaluating the Mandelbrot condition for each iteration until we get to ```max_iters```. If the condition is broken, then we know that the recursion relation at that point is unbounded, and we return the number of iterations it took for the condition to break. Otherwise, if we go all the way to the end, we return ```max_iters``` and that point is in the Mandelbrot set.
+
+Then, we need to use this funcition 
 
 <details>
 <summary> Code to Evaluate the Mandelbrot Function </summary>
