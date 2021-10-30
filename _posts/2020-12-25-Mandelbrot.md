@@ -78,12 +78,18 @@ Then, we need to use the ```mandelbrot``` function on every point in our complex
 <p>
 
 ```python
-def eval_mandelbrot(height, width, x_start, y_start, x_end, y_end, max_iters:int): 
+def eval_mandelbrot(
+    height, width, x_start, y_start, x_end, y_end, max_iters:int): 
     '''
     Evaluates the mandelbrot function for each point in the complex plane
     Returns a NumPy array with the number of iterations as elements
-    cx: Re(c)
-    cy: Im(c)
+    height: int - height of the array / image
+    width: int - width of the array / image
+    x_start: float - Start point on the x (real) axis 
+    x_end: float - End point on the x (real) axis 
+    y_start: float - Start point on the y (imaginary) axis 
+    y_end: float - End point on the y (imaginary) axis 
+    max_iters: int - Max number of iterations to for criterion into the set
     '''
 
     # Define our axes
