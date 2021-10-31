@@ -69,7 +69,8 @@ def mandelbrot(cx, cy, max_iters):
 </details>
 
 <br/>
-It's pretty straightforward, we keep evaluating the Mandelbrot condition for each iteration until we get to ```max_iters```. If the condition is broken, then we know that the recursion relation at that point is unbounded, and we return the number of iterations it took for the condition to break. Otherwise, if we go all the way to the end, we return ```max_iters``` and that point is in the Mandelbrot set.
+
+It's pretty straightforward, we keep evaluating the Mandelbrot condition for each iteration until we get to ```max_iters```.  If the condition is broken, then we know that the recursion relation at that point is unbounded, and we return the number of iterations it took for the condition to break. Otherwise, if we go all the way to the end, we return ```max_iters``` and that point is in the Mandelbrot set.
 
 Then, we need to use the ```mandelbrot``` function on every point in our complex plane. This is defined in a function called ```eval_mandelbrot``` and looks like this: 
 
