@@ -3,6 +3,8 @@ layout: post
 mathjax: true
 title: A Discrete Diffusion Process
 categories: Physics
+tags: python CUDA numba
+published: true
 ---
 
 The goal of this post is to simulate a discrete diffusion process. We're going to do this with a regular CPU serial programming implementation, and then accelerate and parallelise with Numba. 

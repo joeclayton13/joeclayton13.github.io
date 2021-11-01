@@ -3,6 +3,8 @@ layout: post
 mathjax: true
 title: Heating a Square Plate
 categories: Physics
+tags: python CUDA numba
+published: true
 ---
 
 ### Problem Statement ### 

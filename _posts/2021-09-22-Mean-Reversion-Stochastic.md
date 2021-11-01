@@ -3,6 +3,7 @@ layout: post
 mathjax: true
 title: Stochastic Oscillator
 categories: trading
+tags: python 
 published: false
 ---
 

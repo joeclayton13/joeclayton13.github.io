@@ -3,6 +3,7 @@ layout: post
 mathjax: true
 title: Trend Following - Momentum
 categories: Trading
+tags: python 
 published: false
 ---
 
