@@ -25,6 +25,10 @@
   <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/atom.xml' | absolute_url }}">
+  
+  {% if site.tags != "" %}
+    {% include collecttags.html %}
+  {% endif %}
 
   {% if site.google_analytics_id %}
   <script>
