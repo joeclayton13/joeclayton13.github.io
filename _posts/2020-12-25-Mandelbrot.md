@@ -9,6 +9,7 @@ published: true
 
 
 ### Definition ### 
+
 The Mandelbrot set is defined as the set of all values $c$ in the complex plane where the recursion relation 
 $$
 z_{n+1} = z_n^2 + c
