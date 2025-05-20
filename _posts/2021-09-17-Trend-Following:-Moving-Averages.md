@@ -4,7 +4,7 @@ mathjax: true
 title: Trend Following - Moving Average Crossover
 categories: Trading
 tags: python
-published: true
+published: false
 ---
 
 The basic idea is: 
